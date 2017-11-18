@@ -6,6 +6,12 @@ if [ ! -d "~/.backup" ]; then
 fi
 
 
+if [ $# -eq 0 ]; then
+  echo "The usage of this command is: backup [options] targetFileList"
+  echo "Type --help for more information"
+fi
+
+
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -44,7 +50,16 @@ case $key in
       shift 
     ;;
     --help)
-      echo "My Help Message"
+      echo "Simple bash script intended to backup files and directories."
+      echo "Use Cases:"
+      echo "-l Prints a list of all files and directories stored in ~/.backup"
+      echo "-n Prints the number of files and directories stored in ~/.backup"
+      echo "<filename> copies file into ~/backup - overwrites existing files of the same name"
+      echo "<directory name> copies directory and it's contents into ~/.backup" 
+      echo "note that any files  with identical filenames will be overwritten" 
+      echo "<targetFileList> if you input a file specifically named targetFileList"
+      echo "then each line in the file will be read individually and should that line"
+      echo "be a valid file or directory it will be copied into ~/.backup"
       echo ""
       shift
     ;;
@@ -68,8 +83,6 @@ case $key in
             echo ""
           fi
         done
-      echo "My Help Message"
-      echo ""
       shift
     ;;
     *)    
